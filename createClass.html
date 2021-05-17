@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>體育人課堂點名系統</title>
+
+    <link rel="icon" 
+    type="image/png" 
+    href="peman.JPG"">
+
+    <style type="text/css">
+        button{
+            width: 100px; 
+            height:50px; 
+            background-color: white;
+        }
+        #menu {background-color:dodgerblue; display: flex; justify-content: space-around; margin-top: 10px;}
+        #name_time {display: flex; justify-content: space-around;}
+        </style>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+</head>
+<body background="peman3.JPG">
+
+    <div id="main_container">
+            <h1 align="center">設定開課</h1>
+    </div>
+
+    <div id="name_time">
+        <img src="man.jpg" id="titleimage" style="width: 15%; height: 15%;">
+            <h2 id="user-name">no name</h2>
+            <div id="show_time">  
+                <script>  
+                //這裡程式碼多了幾行，但是不會延遲顯示，速度比較好，格式可以自定義，是理想的時間顯示
+                setInterval("fun(show_time)",1);
+                function fun(timeID){ 
+                var date = new Date();  //建立物件  
+                var y = date.getFullYear();     //獲取年份  
+                var m =date.getMonth()+1;   //獲取月份  返回0-11  
+                var d = date.getDate(); // 獲取日  
+                var w = date.getDay();   //獲取星期幾  返回0-6   (0=星期天) 
+                var ww = ' 星期'+'日一二三四五六'.charAt(new Date().getDay()) ;//星期幾
+                var h = date.getHours();  //時
+                var minute = date.getMinutes()  //分
+                var s = date.getSeconds(); //秒
+                var sss = date.getMilliseconds() ; //毫秒
+                if(m<10){
+                m = "0"+m;
+                }
+                if(d<10){
+                d = "0"+d;
+                }
+                if(h<10){
+                h = "0"+h;
+                }
+                
+                
+                if(minute<10){
+                minute = "0"+minute;
+                }
+                
+                
+                if(s<10){
+                s = "0"+s;
+                }
+                
+                
+                if(sss<10){
+                sss = "00"+sss;
+                }else if(sss<100){
+                sss = "0"+sss;
+                }
+                
+                
+                document.getElementById(timeID.id).innerHTML =  y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s+"  "+ww;
+                //document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s);  
+                  }
+                </script>  
+                </div>
+            </div>  
+
+
+        
+            
+                <div class="mbsc-form-group-title" style="background-color: burlywood; color: whitesmoke; font-size: 18px;" >新增課程</div>
+                <form name='form' id='form'>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='className' id='className' placeholder="課程名稱"/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='discription' id='discription' placeholder="簡述課程內容"/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='classPlace' id='classPlace' placeholder="上課地點"/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='teacherName' id='teacherName' placeholder="教練姓名"/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='teacherName2' id='teacherName2' placeholder="助教姓名"/>
+                  
+                    <h5 align="center"> 上課日期:</h5>
+      
+                    <ul style="background-color: darkcyan; color: whitesmoke;">
+            <div ><input id="checkbox" name="checkbox" type="checkbox" value="1" />禮拜一</div>
+            <div><input id="checkbox" name="checkbox" type="checkbox" value="2" />禮拜二</div>  
+            <div><input id="checkbox" name="checkbox" type="checkbox" value="3" />禮拜三</div>  
+            <div ><input id="checkbox" name="checkbox" type="checkbox" value="4" />禮拜四</div>  
+            <div><input id="checkbox" name="checkbox" type="checkbox" value="5" />禮拜五</div>
+            <div ><input id="checkbox" name="checkbox" type="checkbox" value="6" />禮拜六</div>  
+            <div><input id="checkbox" name="checkbox" type="checkbox" value="7" />禮拜日</div>  
+            <div><input id="checkAll" name="checkAll" type="checkbox" value="以上全部" />以上全部</div>
+            </ul>
+    
+             <h5 align="center">上課時間 (中午12點後請輸入 13 14 15...以此類推 ex: 15:30)</h5>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='classTime' id='classTime' placeholder=""/>
+                    <h5 align="center"> 到 </h5>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='classTime' id='classTime2' placeholder=""/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='number' name='studentCount' id='studentCount' placeholder="人數限制"/>
+                    <input style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;" type='text' name='other' id='other' placeholder="備註"/>
+                 </form>
+                 <input  type='button' name='confirm' id='confirm' value="確定" style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;"/>
+
+
+           
+                <div class="mbsc-form-group-title" style="background-color: burlywood; color: whitesmoke;font-size: 18px;">刪除課程</div>
+                <h4 align="center"> 目前已開課之課程名稱:</h4>
+                <h5 align="center">#請注意!! 刪除課程後，該課程所有資料會消失#</h5>
+                    <ul id="J_List" style="background-color: darkcyan; color: whitesmoke;">
+                    </ul> 
+                    
+                <input type='button' name='cencle-confirm' id='cencle-confirm' value="確定" style="width: 200px; margin-top: 20px;margin-bottom: 20px; display: block;margin: 15px auto;"/>
+
+    <script src="firebase.js"></script>
+    <script src="createClass.js"></script>
+</body>
+</html>

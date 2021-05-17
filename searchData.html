@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>體育人課堂點名系統</title>
+
+    <link rel="icon" 
+    type="image/png" 
+    href="peman.JPG"">
+
+    <style type="text/css">
+        button{
+            width: 100px; 
+            height:50px; 
+            background-color: white;
+        }
+        #menu {background-color:dodgerblue; display: flex; justify-content: space-around; margin-top: 10px;}
+        #name_time {display: flex; justify-content: space-around;}
+        .select-style
+        {
+            width: 200px; margin-top: 30px;margin-bottom: 30px;
+        }
+        </style>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+</head>
+<body background="peman3.JPG">
+
+    <div id="main_container">
+            <h1 align="center">資料查詢</h1>
+    </div>
+
+    <div id="name_time">
+       <!--<img src="man.jpg" id="titleimage" style="width: 15%; height: 15%;">
+            <h2 id="user-name">no name</h2>-->
+
+            <div id="show_time">  
+                <script>  
+                //這裡程式碼多了幾行，但是不會延遲顯示，速度比較好，格式可以自定義，是理想的時間顯示
+                setInterval("fun(show_time)",1);
+                function fun(timeID){ 
+                var date = new Date();  //建立物件  
+                var y = date.getFullYear();     //獲取年份  
+                var m =date.getMonth()+1;   //獲取月份  返回0-11  
+                var d = date.getDate(); // 獲取日  
+                var w = date.getDay();   //獲取星期幾  返回0-6   (0=星期天) 
+                var ww = ' 星期'+'日一二三四五六'.charAt(new Date().getDay()) ;//星期幾
+                var h = date.getHours();  //時
+                var minute = date.getMinutes()  //分
+                var s = date.getSeconds(); //秒
+                var sss = date.getMilliseconds() ; //毫秒
+                if(m<10){
+                m = "0"+m;
+                }
+                if(d<10){
+                d = "0"+d;
+                }
+                if(h<10){
+                h = "0"+h;
+                }
+                
+                
+                if(minute<10){
+                minute = "0"+minute;
+                }
+                
+                
+                if(s<10){
+                s = "0"+s;
+                }
+                
+                
+                if(sss<10){
+                sss = "00"+sss;
+                }else if(sss<100){
+                sss = "0"+sss;
+                }
+                
+                
+                document.getElementById(timeID.id).innerHTML =  y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s+"  "+ww;
+                //document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s);  
+                  }
+                </script>  
+                </div>
+            </div>  
+
+
+            <div class="mbsc-form-group-title" style="background-color: burlywood; height: 30px;margin-top: 30px;" >
+            </div>
+        
+            <form>
+                選擇要查詢的點名紀錄
+               <select class="select-style " name="YourLocation" id="class_List" onchange="print_value();">
+               </select>
+               </form>
+            
+               <div id="select_class_List">
+            </div>
+        
+
+    <script src="firebase.js"></script>
+    <script src="searchData.js"></script>
+</body>
+</html>
