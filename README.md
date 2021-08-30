@@ -1,4 +1,4 @@
-# roll-call-system
+#上課點名系統
 
 介紹:\
 這是一個基於firebase資料庫的上課點名系統
