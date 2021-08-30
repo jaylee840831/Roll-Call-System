@@ -11,15 +11,3 @@
 
 系統主畫面
 ![image](https://github.com/jaylee840831/Roll-Call-System/blob/master/%E9%AB%94%E8%82%B2%E4%BA%BA2.JPG)
-
-設定員工基本資料
-![image]()
-
-新增課程
-![image]()
-
-新增學員
-![image]()
-
-點名紀錄查詢
-![image]()
